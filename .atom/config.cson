@@ -1,0 +1,63 @@
+"*":
+  autosave:
+    enabled: true
+  core:
+    customFileTypes:
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+        ".flowconfig"
+      ]
+      "source.json": [
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
+    disabledPackages: [
+      "linter"
+      "tree-view"
+    ]
+    excludeVcsIgnoredPaths: false
+    telemetryConsent: "no"
+  editor:
+    autoIndentOnPaste: false
+    fontFamily: "Source Code Pro"
+    fontSize: 15
+    showIndentGuide: true
+    showInvisibles: true
+  "exception-reporting":
+    userId: "2f4d00f0-96c2-4598-84e1-7fcc2e92cca8"
+  "file-icons":
+    coloured: false
+    onChanges: true
+    strategies:
+      grammar: false
+      hashbangs: false
+      linguist: false
+      modelines: false
+      usertypes: false
+    tabPaneIcon: false
+  "linter-ui-default":
+    panelHeight: 452
+  nuclide:
+    "nuclide-file-tree":
+      hideIgnoredNames: false
+      showOpenFiles: false
+      showUncommittedChanges: false
+    "nuclide-flow":
+      canUseFlowBin: true
+    "nuclide-home":
+      showHome: false
+    "nuclide-ocaml": {}
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
+      showInStatusBar: true
+    prettierOptions:
+      singleQuote: true
+      trailingComma: "es5"
+    useEslint: true
+  "vim-mode-plus": {}
+  welcome:
+    showOnStartup: false
