@@ -1,5 +1,11 @@
-local ret_status="%(?:%{$fg_bold[cyan]%}⚛ :%{$fg_bold[red]%}⚛ )"
-PROMPT='${ret_status} $reset_color%}'
+function node_prompt_version {
+    if which node &> /dev/null; then
+        echo "%{$fg[green]%}$(node -v) %{$reset_color%}"
+    fi
+}
+
+local ret_status="%(?:%{$fg_bold[cyan]%}➜:%{$fg_bold[red]%}➜)"
+PROMPT='${ret_status} $(node_prompt_version)$(git_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
