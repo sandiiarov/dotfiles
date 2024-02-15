@@ -8,7 +8,7 @@ $username\
 $directory\
 [](fg:peach bg:blue)\
 $git_branch\
-$git_status
+$git_status\
 [](fg:blue bg:green)\
 $c\
 $rust\
