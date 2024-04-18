@@ -15,4 +15,4 @@ source ~/.zsh/zsh-fzf/fzf-zsh-plugin.plugin.zsh
 
 eval "$(starship init zsh)"
 
-alias ls="eza --color=always --long --git --no-filesize icons=always --no-time --no-user --no-permissions"
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
