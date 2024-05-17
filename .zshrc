@@ -1,12 +1,10 @@
 # make cursor a vertical line
 echo '\e[5 q'
 
-# ZSH plugins
-
-## eza
-source ~/.zsh/zsh-eza/zsh-eza.plugin.zsh
-
+# ALIASES
 alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first"
+
+# ZSH plugins
 
 ## autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
