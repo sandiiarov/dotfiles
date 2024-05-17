@@ -1,13 +1,16 @@
 # make cursor a vertical line
 echo '\e[5 q'
 
-# ALIASES
-alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first"
-
 # ZSH plugins
+
+## eza
+source ~/.zsh/zsh-eza/zsh-eza.plugin.zsh
+
+alias ls="eza --color=always --long --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first"
 
 ## autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -26,11 +29,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## fzf
+source ~/.zsh/zsh-fzf/fzf-zsh-plugin.plugin.zsh
+
 export PATH=$PATH:~/.zsh/zsh-fzf/bin
 export FZF_COLOR_SCHEME=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#89b4fa,hl:#a6e3a1 \
 --color=fg:#cdd6f4,header:#a6e3a1,info:#cba6f7,pointer:#313244 \
 --color=marker:#89b4fa,fg+:#cdd6f4,prompt:#cba6f7,hl+:#a6e3a1"
-source ~/.zsh/zsh-fzf/fzf-zsh-plugin.plugin.zsh
 
 eval "$(starship init zsh)"
