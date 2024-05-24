@@ -1,0 +1,6 @@
+gui:
+  border: "rounded"
+  theme:
+    selectedRangeBgColor:
+      - "#6c7086"
+
