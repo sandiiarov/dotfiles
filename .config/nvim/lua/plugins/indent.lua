@@ -49,7 +49,7 @@ return {
           },
           repeat_linebreak = false,
           smart_indent_cap = false,
-          char = "┊",
+          char = "│",
         },
         scope = {
           enabled = false,
