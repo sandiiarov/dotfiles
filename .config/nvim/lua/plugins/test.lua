@@ -7,7 +7,7 @@ return {
     opts = {
       adapters = {
         ["neotest-jest"] = {
-          jest_test_discovery = false,
+          jest_test_discovery = true,
           env = { CI = true },
           cwd = function(path)
             local root_path =

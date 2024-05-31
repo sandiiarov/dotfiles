@@ -1,10 +1,10 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    inlay_hints = {
-      enabled = false,
-    },
     opts = {
+      inlay_hints = {
+        enabled = false,
+      },
       servers = {
         eslint = {
           filetypes = {
