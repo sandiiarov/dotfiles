@@ -1,4 +1,11 @@
 return {
   "akinsho/bufferline.nvim",
-  opts = {}
+  opts = {
+    options = {
+      separator_style = { "", "" },
+      indicator = {
+        style = "none"
+      }
+    },
+  }
 }
