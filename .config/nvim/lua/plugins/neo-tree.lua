@@ -4,20 +4,17 @@ return {
     opts = function()
       vim.api.nvim_set_hl(0, "NeoTreeNormal", { fg = vim.g.terminal_color_7, bg = vim.g.terminal_color_0 })
       vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { link = "NeoTreeNormal" })
-      vim.api.nvim_set_hl(0, "FloatBorder", { link = "NeoTreeNormal" })
-      vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { link = "FloatBorder" })
-      vim.api.nvim_set_hl(0, "FloatTitle", { link = "NeoTreeNormal" })
-      vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { link = "FloatTitle" })
+      -- vim.api.nvim_set_hl(0, "FloatBorder", { link = "NeoTreeNormal" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { link = "FloatBorder" })
+      -- vim.api.nvim_set_hl(0, "FloatTitle", { link = "NeoTreeNormal" })
+      -- vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { link = "FloatTitle" })
 
       return {
         popup_border_style = "rounded",
         window = {
-          position = "float",
+          position = "right",
         },
         default_component_configs = {
-          indent = {
-            with_expanders = false,
-          },
           git_status = {
             symbols = {
               unstaged  = "",
@@ -29,7 +26,7 @@ return {
           },
         },
         filesystem = {
-          bind_to_cwd = true,
+          bind_to_cwd = false,
           filtered_items = {
             visible = true,
             hide_dotfiles = false,

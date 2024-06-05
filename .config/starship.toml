@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](surface0)\
+[ ](surface0)\
 $os\
 [ ](bg:surface0)\
 [](bg:peach fg:surface0)\
@@ -172,8 +172,8 @@ disabled = false
 
 [character]
 disabled = false
-error_symbol = '[󰼛](fg:red)'
-success_symbol = '[󰼛](fg:green)'
+error_symbol = '[  󰼛](fg:red)'
+success_symbol = '[  󰼛](fg:green)'
 vimcmd_replace_one_symbol = '[](bold fg:purple)'
 vimcmd_replace_symbol = '[](bold fg:purple)'
 vimcmd_symbol = '[](bold fg:creen)'
