@@ -6,14 +6,6 @@ return {
     },
     wo = {
       winbar = false,
-      winfixwidth = true,
-      winfixheight = true,
-      winhighlight = "",
-      spell = false,
-      signcolumn = "no",
-      statuscolumn = "",
-      number = false,
-      relativenumber = false,
     },
     left = {
       {

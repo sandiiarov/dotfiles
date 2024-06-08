@@ -4,8 +4,8 @@ return {
     options = {
       separator_style = { "", "" },
       indicator = {
-        style = "none"
-      }
+        style = "none",
+      },
     },
-  }
+  },
 }

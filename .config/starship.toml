@@ -1,15 +1,14 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[ ](surface0)\
-$os\
-[ ](bg:surface0)\
-[](bg:peach fg:surface0)\
+[ ](fg:green)\
+[ zsh ](bg:green fg:base)\
+[](bg:peach fg:green)\
 $directory\
 [](fg:peach bg:blue)\
 $git_branch\
 $git_status\
-[](fg:blue bg:green)\
+[](fg:blue bg:maroon)\
 $c\
 $rust\
 $golang\
@@ -19,22 +18,10 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:green)\
+[](fg:maroon)\
 $line_break$character"""
 
 palette = 'catppuccin_mocha'
-
-[palettes.gruvbox_dark]
-color_aqua = '#689d6a'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_fg0 = '#fbf1c7'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
 
 [palettes.catppuccin_mocha]
 base = "#1e1e2e"
@@ -44,8 +31,8 @@ flamingo = "#f2cdcd"
 green = "#a6e3a1"
 lavender = "#b4befe"
 mantle = "#181825"
-maroon = "#eba0ac"
-orange = "#cba6f7"
+orange = "#eba0ac"
+maroon = "#cba6f7"
 overlay0 = "#6c7086"
 overlay1 = "#7f849c"
 overlay2 = "#9399b2"
@@ -66,7 +53,7 @@ yellow = "#f9e2af"
 
 [os]
 disabled = false
-style = "bg:surface0 fg:red"
+style = "bg:green fg:base"
 
 [os.symbols]
 Alpine = ""
@@ -79,7 +66,7 @@ Debian = "�"
 Fedora = "󰣛"
 Gentoo = "󰣨"
 Linux = "󰌽"
-Macos = "󰈸"
+Macos = ""
 Manjaro = ""
 Mint = "�"
 Raspbian = "󰐿"
@@ -117,48 +104,48 @@ format = '[[($all_status$ahead_behind )](fg:base bg:blue)]($style)'
 style = "bg:teal"
 
 [nodejs]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [c]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = " "
 
 [rust]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [golang]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [php]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [java]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = " "
 
 [kotlin]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [haskell]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [python]
-format = '[[ $symbol( $version) ](fg:base bg:green)]($style)'
-style = "bg:green"
+format = '[[ $symbol( $version) ](fg:base bg:maroon)]($style)'
+style = "bg:maroon"
 symbol = ""
 
 [time]
@@ -172,9 +159,5 @@ disabled = false
 
 [character]
 disabled = false
-error_symbol = '[  󰼛](fg:red)'
-success_symbol = '[  󰼛](fg:green)'
-vimcmd_replace_one_symbol = '[](bold fg:purple)'
-vimcmd_replace_symbol = '[](bold fg:purple)'
-vimcmd_symbol = '[](bold fg:creen)'
-vimcmd_visual_symbol = '[](bold fg:lavender)'
+error_symbol = '[ ](fg:surface2)'
+success_symbol = '[ ](fg:surface2)'
