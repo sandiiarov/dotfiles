@@ -5,9 +5,7 @@ return {
     suggestion = {
       enabled = true,
       auto_trigger = true,
-      keymap = {
-        accept = "<Tab>",
-      },
+      debounce = 0,
     },
     filetypes = {
       ["*"] = true,
