@@ -1,0 +1,89 @@
+.inline-tabs-placeholder {
+  display: none;
+}
+
+#vscodevim\.vim\.primary {
+  order: -1;
+  background-color: #313244;
+  color: #cdd6f4;
+}
+
+#vscodevim\.vim\.primary[aria-label="-- NORMAL --"] {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+}
+
+#vscodevim\.vim\.primary[aria-label="-- INSERT --"] {
+  background-color: #a6e3a1;
+  color: #1e1e2e;
+}
+
+#vscodevim\.vim\.primary[aria-label^="-- VISUAL"] {
+  background-color: #cba6f7;
+  color: #1e1e2e;
+}
+
+#vscodevim\.vim\.primary[aria-label^="-- REPLACE --"] {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+
+#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION --"] {
+  background-color: #fab387;
+  color: #1e1e2e;
+}
+
+#vscodevim\.vim\.primary[aria-label$="|"] {
+  width: 600px;
+  height: 46px;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  background-color: transparent;
+  padding: 0;
+  margin-left: -300px;
+}
+
+#vscodevim\.vim\.primary[aria-label$="|"] > a {
+  box-sizing: border-box;
+  height: 28px;
+  margin: 8px 6px;
+  background-color: var(--vscode-input-background);
+  box-shadow: 0 0 8px 2px var(--vscode-widget-shadow);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-focusBorder);
+  border-radius: 2px;
+}
+
+.statusbar {
+  font-weight: 900;
+}
+
+.badge-content {
+  font-weight: 900;
+  height: 12px !important;
+  line-height: 12px !important;
+  opacity: 0.6;
+  padding: 0 2px !important;
+  top: 4px !important;
+}
+.explorer-viewlet .monaco-list:focus .monaco-list-row.focused:not(.monaco-tree-sticky-row) .monaco-tl-indent {
+  box-shadow: -12px 0px var(--vscode-list-activeSelectionBackground), -20px 0px #f5e0dc;
+  min-width: 8px;
+}
+.output-view .view-lines {
+  font-size: 11px !important;
+  line-height: 14px !important;
+}
+.quick-input-widget {
+  border: 1px solid var(--vscode-focusBorder) !important;
+  top: 10% !important;
+}
+.scm-view .monaco-list:focus .monaco-list-row.focused:not(.monaco-tree-sticky-row) .monaco-tl-indent {
+  box-shadow: -8px 0px var(--vscode-list-activeSelectionBackground), -16px 0px #f5e0dc;
+  min-width: 8px;
+}
+.search-view .monaco-list:focus .monaco-list-row.focused:not(.monaco-tree-sticky-row) .monaco-tl-indent {
+  box-shadow: -8px 0px var(--vscode-list-activeSelectionBackground), -16px 0px #f5e0dc;
+  min-width: 8px;
+}
