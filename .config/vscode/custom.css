@@ -4,33 +4,31 @@
 
 #vscodevim\.vim\.primary {
   order: -1;
-  background-color: #313244;
-  color: #cdd6f4;
 }
 
-#vscodevim\.vim\.primary[aria-label="-- NORMAL --"] {
-  background-color: #89b4fa;
-  color: #1e1e2e;
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- NORMAL --"]) {
+  background-color: #89b4fa !important;
+  color: #1e1e2e !important;
 }
 
-#vscodevim\.vim\.primary[aria-label="-- INSERT --"] {
-  background-color: #a6e3a1;
-  color: #1e1e2e;
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- INSERT --"]) {
+  background-color: #a6e3a1 !important;
+  color: #1e1e2e !important;
 }
 
-#vscodevim\.vim\.primary[aria-label^="-- VISUAL"] {
-  background-color: #cba6f7;
-  color: #1e1e2e;
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- VISUAL --"]) {
+  background-color: #cba6f7 !important;
+  color: #1e1e2e !important;
 }
 
-#vscodevim\.vim\.primary[aria-label^="-- REPLACE --"] {
-  background-color: #f38ba8;
-  color: #1e1e2e;
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- REPLACE --"]) {
+  background-color: #f38ba8 !important;
+  color: #1e1e2e !important;
 }
 
-#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION --"] {
-  background-color: #fab387;
-  color: #1e1e2e;
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION --"]) {
+  background-color: #fab387 !important;
+  color: #1e1e2e !important;
 }
 
 #vscodevim\.vim\.primary[aria-label$="|"] {
@@ -46,13 +44,15 @@
 
 #vscodevim\.vim\.primary[aria-label$="|"] > a {
   box-sizing: border-box;
-  height: 28px;
+  height: 32px;
   margin: 8px 6px;
   background-color: var(--vscode-input-background);
   box-shadow: 0 0 8px 2px var(--vscode-widget-shadow);
   color: var(--vscode-input-foreground);
   border: 1px solid var(--vscode-focusBorder);
   border-radius: 2px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .statusbar {
