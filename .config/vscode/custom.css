@@ -1,3 +1,6 @@
+.tabs {
+  background-color: rgb(24, 24, 37) !important;
+}
 .inline-tabs-placeholder {
   display: none;
 }
