@@ -9,27 +9,27 @@
   order: -1;
 }
 
-.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- NORMAL --"]) {
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- NORMAL"]) {
   background-color: #89b4fa !important;
   color: #1e1e2e !important;
 }
 
-.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- INSERT --"]) {
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- INSERT"]) {
   background-color: #a6e3a1 !important;
   color: #1e1e2e !important;
 }
 
-.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- VISUAL --"]) {
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- VISUAL"]) {
   background-color: #cba6f7 !important;
   color: #1e1e2e !important;
 }
 
-.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- REPLACE --"]) {
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- REPLACE"]) {
   background-color: #f38ba8 !important;
   color: #1e1e2e !important;
 }
 
-.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION --"]) {
+.statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION"]) {
   background-color: #fab387 !important;
   color: #1e1e2e !important;
 }
