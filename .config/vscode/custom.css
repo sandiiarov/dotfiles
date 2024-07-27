@@ -1,39 +1,35 @@
+.activitybar {
+  background-color: var(--vscode-sideBar-background) !important;
+}
 .tabs {
-  background-color: rgb(24, 24, 37) !important;
+  background-color: var(--vscode-sideBar-background) !important;
 }
 .inline-tabs-placeholder {
   display: none;
 }
-
 #vscodevim\.vim\.primary {
   order: -1;
 }
-
 .statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- NORMAL"]) {
   background-color: #89b4fa !important;
   color: #1e1e2e !important;
 }
-
 .statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- INSERT"]) {
   background-color: #a6e3a1 !important;
   color: #1e1e2e !important;
 }
-
 .statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- VISUAL"]) {
   background-color: #cba6f7 !important;
   color: #1e1e2e !important;
 }
-
 .statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- REPLACE"]) {
   background-color: #f38ba8 !important;
   color: #1e1e2e !important;
 }
-
 .statusbar:has(#vscodevim\.vim\.primary[aria-label^="-- EASYMOTION"]) {
   background-color: #fab387 !important;
   color: #1e1e2e !important;
 }
-
 #vscodevim\.vim\.primary[aria-label$="|"] {
   width: 600px;
   height: 46px;
@@ -44,7 +40,6 @@
   padding: 0;
   margin-left: -300px;
 }
-
 #vscodevim\.vim\.primary[aria-label$="|"] > a {
   box-sizing: border-box;
   height: 32px;
@@ -57,11 +52,9 @@
   font-size: 13px;
   font-weight: 400;
 }
-
 .statusbar {
   font-weight: 600;
 }
-
 .badge-content {
   font-weight: 900;
   height: 12px !important;
