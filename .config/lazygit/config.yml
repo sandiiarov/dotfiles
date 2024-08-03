@@ -1,6 +1,12 @@
 gui:
-  border: "rounded"
-  theme:
-    selectedRangeBgColor:
-      - "#6c7086"
-
+  border: "single"
+  nerdFontsVersion: "3"
+os:
+  #  If vscode cli is installed
+  # open: "code {{filename}}"
+  # open: "~/Apps/Visual\\ Studio\\ Code.app/contents/Resources/app/bin/code {{filename}}"
+git:
+  branchPrefix: "feature/PPP-"
+  commitPrefix:
+    pattern: "feature\\/([A-Z]+-\\d+)"
+    replace: "$0 "
