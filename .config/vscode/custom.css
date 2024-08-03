@@ -1,11 +1,19 @@
-.activitybar {
-  background-color: var(--vscode-sideBar-background) !important;
-}
 .tabs {
-  background-color: var(--vscode-sideBar-background) !important;
+  background-color: rgb(24, 24, 37) !important;
+}
+.label-name {
+  font-family: "JetBrainsMono Nerd Font", Menlo, Monaco, "Courier New", monospace !important;
 }
 .inline-tabs-placeholder {
   display: none;
+}
+.slider {
+  width: 2px !important;
+  left: auto !important;
+  right: 0;
+}
+.activitybar {
+  background-color: var(--vscode-sideBarTitle-background) !important;
 }
 #vscodevim\.vim\.primary {
   order: -1;
@@ -53,6 +61,7 @@
   font-weight: 400;
 }
 .statusbar {
+  font-family: "JetBrainsMono Nerd Font", Menlo, Monaco, "Courier New", monospace !important;
   font-weight: 600;
 }
 .badge-content {
