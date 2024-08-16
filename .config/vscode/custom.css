@@ -38,6 +38,10 @@
   background-color: #fab387 !important;
   color: #1e1e2e !important;
 }
+.statusbar:has(#vscodevim\.vim\.primary[aria-label$="|"]) {
+  background-color: #cdd6f4 !important;
+  color: #1e1e2e !important;
+}
 #vscodevim\.vim\.primary[aria-label$="|"] {
   width: 600px;
   height: 46px;
