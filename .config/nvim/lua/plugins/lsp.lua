@@ -15,6 +15,18 @@ return {
         },
       },
       stylelint_lsp = {
+        filetypes = {
+          "css",
+          "scss",
+          "less",
+          "sass",
+          "vue",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+        },
         settings = {
           stylelintplus = {
             autoFixOnSave = true,
@@ -22,14 +34,14 @@ return {
           },
         },
       },
-    },
-    diagnostics = {
-      virtual_text = {
-        spacing = 2,
-        prefix = "",
-      },
-      float = {
-        border = "rounded",
+      graphql = {
+        filetypes = {
+          "graphql",
+          "typescript",
+          "typescriptreact",
+          "javascript",
+          "javascriptreact",
+        },
       },
     },
   },

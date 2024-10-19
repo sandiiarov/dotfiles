@@ -6,8 +6,5 @@ return {
       "stylelint-lsp",
       "graphql-language-service-cli",
     },
-    ui = {
-      border = "rounded",
-    },
   },
 }
