@@ -6,12 +6,13 @@ TERM = "xterm-256color"
 [window]
 startup_mode = "Windowed"
 decorations = "Buttonless"
-opacity = 0.98
+opacity = 0.99
 option_as_alt = "Both"
 
 [font]
 normal.family = "JetBrainsMono Nerd Font"
 size = 13.0
+builtin_box_drawing = false
 
 [[keyboard.bindings]]
 chars = "\u0001" # Ctrl + A
