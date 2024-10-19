@@ -1,5 +1,5 @@
 gui:
-  border: "single"
+  border: "rounded"
   nerdFontsVersion: "3"
 os:
   #  If vscode cli is installed
