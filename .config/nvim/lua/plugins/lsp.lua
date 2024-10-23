@@ -4,6 +4,11 @@ return {
     inlay_hints = {
       enabled = false,
     },
+    diagnostics = {
+      float = {
+        border = "rounded",
+      },
+    },
     servers = {
       eslint = {
         filetypes = {
