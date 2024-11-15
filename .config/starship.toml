@@ -1,14 +1,14 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[ ](fg:green)\
+[ ](bg:green fg:green)\
 [ zsh ](bg:green fg:base)\
-[](bg:peach fg:green)\
+[](bg:peach fg:green)\
 $directory\
-[](fg:peach bg:blue)\
+[](fg:peach bg:blue)\
 $git_branch\
 $git_status\
-[](fg:blue bg:maroon)\
+[](fg:blue bg:maroon)\
 $c\
 $rust\
 $golang\
@@ -31,8 +31,8 @@ flamingo = "#f2cdcd"
 green = "#a6e3a1"
 lavender = "#b4befe"
 mantle = "#181825"
-orange = "#eba0ac"
 maroon = "#cba6f7"
+orange = "#eba0ac"
 overlay0 = "#6c7086"
 overlay1 = "#7f849c"
 overlay2 = "#9399b2"
@@ -159,5 +159,5 @@ disabled = false
 
 [character]
 disabled = false
-error_symbol = '[ ](fg:surface2)'
-success_symbol = '[ ](fg:surface2)'
+error_symbol = '[](fg:surface2)'
+success_symbol = '[](fg:surface2)'

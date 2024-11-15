@@ -32,9 +32,6 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.test.core" },
 
-    { import = "lazyvim.plugins.extras.coding.copilot" },
-    { import = "lazyvim.plugins.extras.coding.copilot-chat" },
-
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
 
     -- import/override with your plugins
