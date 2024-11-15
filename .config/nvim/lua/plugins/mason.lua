@@ -5,7 +5,7 @@ return {
       "css-lsp",
       "stylelint-lsp",
       "graphql-language-service-cli",
-      "harper-ls",
+      "typos-lsp",
     },
     ui = {
       border = "rounded",
