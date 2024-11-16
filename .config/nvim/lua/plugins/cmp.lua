@@ -1,7 +1,7 @@
 return {
   "hrsh7th/nvim-cmp",
-  opts = function(_, opts)
-    opts.window = {
+  opts = {
+    window = {
       completion = {
         border = "rounded",
         winhighlight = "Normal:MyHighlight",
@@ -12,6 +12,6 @@ return {
         winhighlight = "Normal:MyHighlight",
         winblend = 0,
       },
-    }
-  end,
+    },
+  },
 }
