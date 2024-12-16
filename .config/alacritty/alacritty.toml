@@ -126,43 +126,15 @@ mods = "Command"
 chars = "\u001c"
 key = "\\"
 mods = "Command"
-[[keyboard.bindings]] # Ctrl + [
-chars = "\u001b"
-key = "["
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + ]
-chars = "\u001d"
-key = "]"
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + ;
-chars = "\u001b"
-key = ";"
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + '
-chars = "\u001b"
-key = "'"
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + `
-chars = "\u001b"
-key = "`"
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + -
-chars = "\u001f"
-key = "-"
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + =
-chars = "\u001f"
-key = "="
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + ,
-chars = "\u001f"
-key = ","
-mods = "Command"
-[[keyboard.bindings]] # Ctrl + .
-chars = "\u001f"
-key = "."
+[[keyboard.bindings]] # Ctrl + Up
+chars = "\u001b[A"
+key = "Up"
 mods = "Command"
 [[keyboard.bindings]] # Ctrl + Enter
 action = "ToggleSimpleFullscreen"
 key = "Enter"
+mods = "Command"
+[[keyboard.bindings]] # Ctrl + N
+action = "SpawnNewInstance"
+key = "W"
 mods = "Command"
