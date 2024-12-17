@@ -1,5 +1,3 @@
-local bufferline = require("bufferline")
-
 return {
   "akinsho/bufferline.nvim",
   opts = {
@@ -7,16 +5,12 @@ return {
       always_show_bufferline = true,
       show_buffer_close_icons = false,
       show_close_icon = false,
-      separator_style = { "", "" },
+      separator_style = { "", "" },
       indicator = {
-        style = "underline",
+        icon = ".",
+        style = "icon",
       },
       modified_icon = "",
-      style_preset = {
-        bufferline.style_preset.no_italic,
-        bufferline.style_preset.no_bold,
-      },
     },
-    highlights = {},
   },
 }
