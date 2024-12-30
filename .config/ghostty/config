@@ -1,0 +1,58 @@
+## Window
+window-decoration = false
+mouse-hide-while-typing = true
+window-padding-x = 0
+window-padding-y = 0
+macos-window-shadow = false
+macos-non-native-fullscreen = true
+
+## Clipboard
+clipboard-read = "allow"
+clipboard-paste-protection = false
+
+## Background
+background-opacity = 0.99
+
+## Theme
+theme = catppuccin-mocha
+font-family = JetBrains Mono
+font-size = 13
+
+## Quick Terminal
+quick-terminal-position = bottom
+
+## Keybinds
+# keybind = cmd+a=text:\x01
+# keybind = cmd+b=text:\x02
+# keybind = cmd+c=text:\x03
+# keybind = cmd+d=text:\x04
+# keybind = cmd+e=text:\x05
+# keybind = cmd+f=text:\x06
+# keybind = cmd+g=text:\x07
+keybind = cmd+h=text:\x08
+# keybind = cmd+i=text:\x09
+keybind = cmd+j=text:\x0A
+keybind = cmd+k=text:\x0B
+keybind = cmd+l=text:\x0C
+# keybind = cmd+m=text:\x0D
+keybind = cmd+n=text:\x0E
+# keybind = cmd+o=text:\x0F
+keybind = cmd+p=text:\x10
+# keybind = cmd+q=text:\x11
+# keybind = cmd+r=text:\x12
+# keybind = cmd+s=text:\x13
+# keybind = cmd+t=text:\x14
+# keybind = cmd+u=text:\x15
+# keybind = cmd+v=text:\x16
+# keybind = cmd+w=text:\x17
+# keybind = cmd+x=text:\x18
+# keybind = cmd+y=text:\x19
+# keybind = cmd+z=text:\x1A
+
+keybind = cmd+/=toggle_quick_terminal
+
+keybind = cmd+shift+h=text:\x1B\x5B\x31\x30\x34\x3B\x36\x75
+keybind = cmd+shift+j=text:\x1B\x5B\x31\x30\x36\x3B\x36\x75
+keybind = cmd+shift+k=text:\x1B\x5B\x31\x30\x37\x3B\x36\x75
+keybind = cmd+shift+l=text:\x1B\x5B\x31\x30\x38\x3B\x36\x75
+
