@@ -20,6 +20,7 @@ font-size = 13
 
 ## Quick Terminal
 quick-terminal-position = bottom
+quick-terminal-autohide = false
 
 ## Keybinds
 # keybind = cmd+a=text:\x01
@@ -49,7 +50,7 @@ keybind = cmd+p=text:\x10
 # keybind = cmd+y=text:\x19
 # keybind = cmd+z=text:\x1A
 
-keybind = cmd+/=toggle_quick_terminal
+keybind = cmd+/=text:\x1F
 
 keybind = cmd+shift+h=text:\x1B\x5B\x31\x30\x34\x3B\x36\x75
 keybind = cmd+shift+j=text:\x1B\x5B\x31\x30\x36\x3B\x36\x75

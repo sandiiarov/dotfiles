@@ -2,9 +2,17 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  requires = "SmiteshP/nvim-navic",
   opts = {
     indent = { enabled = false },
     scroll = { enabled = false },
+    terminal = {
+      win = {
+        wo = {
+          winbar = " %{b:snacks_terminal.id}",
+        },
+      },
+    },
     dashboard = {
       preset = {
         header = [[
