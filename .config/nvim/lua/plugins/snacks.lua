@@ -9,7 +9,7 @@ return {
     terminal = {
       win = {
         wo = {
-          winbar = " %{b:snacks_terminal.id}",
+          winbar = "",
         },
       },
     },

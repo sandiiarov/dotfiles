@@ -1,8 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+add_newline = false
+
 format = """
-[ ](bg:green fg:green)\
-[ zsh ](bg:green fg:base)\
+[  zsh ](bg:green fg:base)\
 [](bg:peach fg:green)\
 $directory\
 [](fg:peach bg:blue)\
