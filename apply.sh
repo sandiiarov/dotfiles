@@ -89,10 +89,13 @@ sync_dir_contents() {
 # 1. Append a source line to ~/.zshrc (instead of overwriting it)
 append_line_if_missing "$HOME/.zshrc" "source $DOTFILES_DIR/.zshrc"
 
-# 2. Replace (back up + copy) everything under .zsh
+# 2. Replace (back up + copy) ~/.fzf.zsh
+backup_and_copy "$DOTFILES_DIR/.fzg.zsh" "$HOME/.fzf.zsh"
+
+# 3. Replace (back up + copy) everything under .zsh
 sync_dir_contents "$DOTFILES_DIR/zsh-plugins" "$HOME/.zsh"
 
-# 3. Replace (back up + copy) everything under .config
+# 4. Replace (back up + copy) everything under .config
 sync_dir_contents "$DOTFILES_DIR/.config" "$HOME/.config"
 
 echo "[INFO] All dotfiles and config items have been processed!"
