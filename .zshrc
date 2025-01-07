@@ -27,7 +27,7 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-fzf/fzf-zsh-plugin.plugin.zsh
 
 export PATH=$PATH:~/.zsh/zsh-fzf/bin
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'--color=gutter:-1 --pointer=""'
+export FZF_DEFAULT_OPTS='--color=gutter:-1 --pointer=""'
 export FZF_COLOR_SCHEME=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#89b4fa,hl:#a6e3a1 \
 --color=fg:#cdd6f4,header:#a6e3a1,info:#cba6f7,pointer:#313244 \
