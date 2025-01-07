@@ -4,14 +4,7 @@ This repo contains personal config files (dotfiles) and an `apply.sh` script to 
 
 ## Usage
 
-1. **Clone** this repo (e.g., to `~/Documents/dotfiles`) and **make the script executable**:
-
-   ```bash
-   cd ~/Documents/dotfiles
-   chmod +x apply.sh
-   ```
-
-2. **Run** the script:
+1. **Run** the script:
 
    ```bash
    ./apply.sh
