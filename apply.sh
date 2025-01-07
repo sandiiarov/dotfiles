@@ -35,7 +35,7 @@ replace_item() {
 ##############################################################################
 
 # 1. Replace your .zshrc
-replace_item "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+# replace_item "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 # 2. Replace all desired folders/files under .config
 #    e.g. ghostty, lazygit, nvim, starship.toml, etc.
