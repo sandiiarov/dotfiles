@@ -18,15 +18,6 @@ echo "[INFO] Backups will be saved in: $BACKUP_DIR"
 # Ensure backup directory exists
 mkdir -p "$BACKUP_DIR"
 
-# Ensure "backups/" is in .gitignore (so backups aren't committed)
-GITIGNORE="$DOTFILES_DIR/.gitignore"
-if [[ -w "$DOTFILES_DIR" ]]; then
-  if ! grep -Fxq "backups/" "$GITIGNORE" 2>/dev/null; then
-    echo "backups/" >>"$GITIGNORE"
-    echo "[INFO] Added 'backups/' to $GITIGNORE"
-  fi
-fi
-
 ##############################################################################
 # FUNCTION: backup_and_copy
 #   - If the destination already exists, move it into BACKUP_DIR.
