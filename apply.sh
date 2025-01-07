@@ -90,7 +90,7 @@ sync_dir_contents() {
 append_line_if_missing "$HOME/.zshrc" "source $DOTFILES_DIR/.zshrc"
 
 # 2. Replace (back up + copy) everything under .zsh
-sync_dir_contents "$DOTFILES_DIR/.zsh" "$HOME/.zsh"
+sync_dir_contents "$DOTFILES_DIR/zsh-plugins" "$HOME/.zsh"
 
 # 3. Replace (back up + copy) everything under .config
 sync_dir_contents "$DOTFILES_DIR/.config" "$HOME/.config"
