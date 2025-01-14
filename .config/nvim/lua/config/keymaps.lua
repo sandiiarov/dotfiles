@@ -9,9 +9,7 @@ map("n", "<C-S-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-S-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-S-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
---------------------------------------------------------------------------------
--- Helpers
---------------------------------------------------------------------------------
+local Path = require("plenary.path")
 
 local function get_lazy_root()
   local ok, lazy_config = pcall(require, "lazy.core.config")
@@ -23,107 +21,83 @@ local function get_lazy_root()
 end
 
 local function get_cwd()
-  return vim.loop.cwd() -- or vim.fn.getcwd()
+  return vim.loop.cwd()
 end
 
-local function expand_tilde(path)
-  if path:sub(1, 1) == "~" then
-    local home = vim.loop.os_homedir()
-    return path:gsub("^~", home)
+local function expand_path(raw)
+  return Path:new(raw):expand()
+end
+
+local function file_exists(path_str)
+  local p = Path:new(path_str)
+  return p:exists() and p:is_file()
+end
+
+local function try_trim_and_check(path_str)
+  if file_exists(path_str) then
+    return path_str
   end
-  return path
-end
-
-local function compute_possible_paths(raw_path, lazy_root, cwd)
-  local expanded_self = expand_tilde(raw_path)
-
-  local expansions = {
-    vim.fs.joinpath(lazy_root, expanded_self),
-    vim.fs.joinpath(cwd, expanded_self),
-    expanded_self,
-  }
-
-  -- If the path doesn't start with a slash, also try prefixing one:
-  if not expanded_self:match("^/") then
-    local slash_version = "/" .. expanded_self
-    table.insert(expansions, slash_version)
-    table.insert(expansions, vim.fs.joinpath(cwd, slash_version))
-    table.insert(expansions, vim.fs.joinpath(lazy_root, slash_version))
-  end
-
-  return expansions
-end
-
-local function file_exists(path)
-  local stat = vim.loop.fs_stat(path)
-  return stat ~= nil and stat.type == "file"
-end
-
---------------------------------------------------------------------------------
---  This is the new function to "check or trim"
---------------------------------------------------------------------------------
-local function try_trim_and_check(path)
-  if file_exists(path) then
-    return path
-  end
-
   local pattern = "['\"`()%[%]{}<>,%.]"
   local start_i = 1
-  local end_i = #path
-
+  local end_i = #path_str
   while start_i <= end_i do
-    local first_char = path:sub(start_i, start_i)
-    local last_char = path:sub(end_i, end_i)
-
-    local first_is_junk = first_char:match(pattern)
-    local last_is_junk = last_char:match(pattern)
-
-    if first_is_junk then
+    local first_char = path_str:sub(start_i, start_i)
+    local last_char = path_str:sub(end_i, end_i)
+    if first_char:match(pattern) then
       start_i = start_i + 1
-    elseif last_is_junk then
+    elseif last_char:match(pattern) then
       end_i = end_i - 1
     else
       break
     end
   end
-
-  local trimmed = path:sub(start_i, end_i)
+  local trimmed = path_str:sub(start_i, end_i)
   if trimmed ~= "" and file_exists(trimmed) then
     return trimmed
   end
   return nil
 end
 
---------------------------------------------------------------------------------
---  Regex (or pattern) to find raw paths in lines
---------------------------------------------------------------------------------
-local function extract_raw_paths_from_line(line)
-  local path_pattern = "[~%./]?[%w%-%_%.%/:]+"
+local function compute_possible_paths(raw_path, lazy_root, cwd)
+  local expanded_self = expand_path(raw_path)
+  local expansions = {
+    Path:new(lazy_root, expanded_self):expand(),
+    Path:new(cwd, expanded_self):expand(),
+    expanded_self,
+  }
+  if not expanded_self:match("^/") then
+    local slash_version = "/" .. expanded_self
+    table.insert(expansions, slash_version)
+    table.insert(expansions, Path:new(cwd, slash_version):expand())
+    table.insert(expansions, Path:new(lazy_root, slash_version):expand())
+  end
+  return expansions
+end
+
+local function extract_tokens_from_line(line)
   local results = {}
-  for match in line:gmatch(path_pattern) do
-    table.insert(results, match)
+  for token in line:gmatch("%S+") do
+    table.insert(results, token)
   end
   return results
 end
 
---------------------------------------------------------------------------------
---  The main function: find file paths
---------------------------------------------------------------------------------
 local function find_file_paths()
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
   local found_paths = {}
-
   local lazy_root = get_lazy_root()
   local cwd = get_cwd()
-
   for line_nr, line in ipairs(lines) do
-    local raw_paths = extract_raw_paths_from_line(line)
-
-    for _, raw_path in ipairs(raw_paths) do
-      -- Step 1: generate expansions
-      local expansions = compute_possible_paths(raw_path, lazy_root, cwd)
-
-      -- Step 2: for each expansion, "check or trim"
+    local tokens = extract_tokens_from_line(line)
+    local search_start = 1
+    for _, token in ipairs(tokens) do
+      local s, e = string.find(line, token, search_start, true)
+      if s and e then
+        search_start = e + 1
+      else
+        s, e = 1, 1
+      end
+      local expansions = compute_possible_paths(token, lazy_root, cwd)
       local actual_path = nil
       for _, candidate in ipairs(expansions) do
         local maybe_fixed = try_trim_and_check(candidate)
@@ -132,97 +106,95 @@ local function find_file_paths()
           break
         end
       end
-
-      -- If we got a valid path, highlight it
       if actual_path then
-        -- find the substring in the line (for highlight positions)
-        local s, e = string.find(line, raw_path, 1, true)
-        if s then
-          table.insert(found_paths, {
-            match = raw_path,
-            path_to_open = actual_path,
-            line_nr = line_nr - 1,
-            start_col = s - 1,
-            end_col = e,
-          })
-        end
+        table.insert(found_paths, {
+          match = token,
+          path_to_open = actual_path,
+          line_nr = line_nr - 1,
+          start_col = s - 1,
+          end_col = e,
+        })
       end
     end
   end
-
   if #found_paths == 0 then
     print("No valid file paths found in current buffer.")
     return
   end
-
-  -- Print summary
   print("Found paths that exist:")
   for _, entry in ipairs(found_paths) do
-    print(("%s -> %s (line %s, col %s)"):format(entry.match, entry.path_to_open, entry.line_nr, entry.start_col))
+    print(("%s -> %s (line %d, col %d)"):format(entry.match, entry.path_to_open, entry.line_nr, entry.start_col))
   end
-
   return found_paths
 end
 
---------------------------------------------------------------------------------
---  The highlight/dim part
---------------------------------------------------------------------------------
+local function exit_search_mode(ns_id, augroup)
+  vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
+  for _, key in ipairs({ "n", "N", "<Esc>" }) do
+    pcall(vim.api.nvim_buf_del_keymap, 0, "n", key)
+  end
+  if augroup then
+    pcall(vim.api.nvim_clear_autocmds, { group = augroup })
+  end
+  print("Exited path search mode.")
+end
+
+local function attach_mode_changed_autocmd(ns_id, augroup)
+  vim.api.nvim_create_autocmd("ModeChanged", {
+    group = augroup,
+    pattern = "*",
+    callback = function()
+      local m = vim.api.nvim_get_mode().mode
+      if not m:match("^n") then
+        exit_search_mode(ns_id, augroup)
+      end
+    end,
+  })
+end
+
+local function enter_search_mode(found_paths, ns_id)
+  if not found_paths or #found_paths == 0 then
+    return
+  end
+  local current_idx = 1
+  local function jump_to_path(p)
+    if not p then
+      return
+    end
+    vim.api.nvim_win_set_cursor(0, { p.line_nr + 1, p.start_col })
+  end
+  jump_to_path(found_paths[current_idx])
+  local function jump_next()
+    current_idx = current_idx % #found_paths + 1
+    jump_to_path(found_paths[current_idx])
+  end
+  local function jump_prev()
+    current_idx = (current_idx - 2) % #found_paths + 1
+    jump_to_path(found_paths[current_idx])
+  end
+  local augroup = vim.api.nvim_create_augroup("FilePathSearchMode", { clear = true })
+  attach_mode_changed_autocmd(ns_id, augroup)
+  vim.keymap.set("n", "n", jump_next, { buffer = 0 })
+  vim.keymap.set("n", "N", jump_prev, { buffer = 0 })
+  vim.keymap.set("n", "<Esc>", function()
+    exit_search_mode(ns_id, augroup)
+  end, { buffer = 0 })
+end
+
 local function find_and_dim_others()
   local found_paths = find_file_paths()
   if not found_paths or #found_paths == 0 then
     return
   end
-
   local ns_id = vim.api.nvim_create_namespace("DimFilePathsNS")
-  local line_count = vim.api.nvim_buf_line_count(0)
-
-  -- Dim entire buffer
-  for line_idx = 0, line_count - 1 do
-    vim.api.nvim_buf_add_highlight(0, ns_id, "Conceal", line_idx, 0, -1)
-  end
-
-  -- Highlight recognized paths
   for _, entry in ipairs(found_paths) do
     vim.api.nvim_buf_add_highlight(0, ns_id, "Search", entry.line_nr, entry.start_col, entry.end_col)
+    vim.api.nvim_buf_add_highlight(0, ns_id, "Underlined", entry.line_nr, entry.start_col, entry.end_col)
   end
+  enter_search_mode(found_paths, ns_id)
 end
 
---------------------------------------------------------------------------------
--- Insert a small label at the beginning of each path, highlight that label
---------------------------------------------------------------------------------
-local function label_and_highlight_paths()
-  local found_paths = find_file_paths()
-  if not found_paths or #found_paths == 0 then
-    print("No paths found.")
-    return
-  end
+vim.keymap.set("n", "<leader>fp", find_and_dim_others, {})
 
-  -- We create a namespace for these highlights, so we can clear them if desired
-  local ns_id = vim.api.nvim_create_namespace("LabelFilePathsNS")
-
-  -- 1) Sort matches in descending order of line_nr, then start_col
-  table.sort(found_paths, function(a, b)
-    if a.line_nr == b.line_nr then
-      return a.start_col > b.start_col
-    else
-      return a.line_nr > b.line_nr
-    end
-  end)
-
-  -- 2) Insert label + highlight. We'll just use the same label "[ab]" for all,
-  --    but you could generate unique labels per path if you like.
-  local label = "ab" -- or generate dynamically like "[aa]", "[ab]", "[ac]" ...
-  for _, match in ipairs(found_paths) do
-    -- Insert the label text at (line_nr, start_col)
-    -- This does not delete any existing text, it just adds our label
-    vim.api.nvim_buf_set_text(0, match.line_nr, match.start_col, match.line_nr, match.start_col, { label })
-
-    -- Now highlight the label region using "Search"
-    -- The label is exactly #label characters long, starting at start_col
-    vim.api.nvim_buf_add_highlight(0, ns_id, "FlashLabel", match.line_nr, match.start_col, match.start_col + #label)
-  end
-
-  print("Done labeling paths!")
-end
-
-map("n", "<leader>fp", label_and_highlight_paths, { desc = "Find file path in buffer" })
+-- Finally, bind the main function to <leader>fp
+map("n", "<leader>fp", find_and_dim_others, { desc = "Find file paths in buffer and enter search mode" })
