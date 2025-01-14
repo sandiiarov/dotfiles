@@ -5,5 +5,8 @@ return {
       "css",
       "graphql",
     },
+    highlight = {
+      disable = { "markdown" },
+    },
   },
 }
