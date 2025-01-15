@@ -11,7 +11,7 @@ clipboard-read = "allow"
 clipboard-paste-protection = false
 
 ## Background
-background-opacity = 0.99
+background-opacity = 0.95
 
 ## Theme
 theme = catppuccin-mocha

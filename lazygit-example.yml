@@ -1,0 +1,5 @@
+git:
+  branchPrefix: feature/AAA-
+  commitPrefix:
+    pattern: feature\\/([A-Z]+-\\d+)
+    replace: $0

@@ -1,3 +1,67 @@
+local function getGitConfig()
+  local function parse_yaml(content)
+    local result = {}
+    local current_section
+
+    for line in content:gmatch("[^\r\n]+") do
+      -- Ignore comments and empty lines
+      if not line:match("^%s*#") and line:match("%S") then
+        local key, value = line:match("^%s*([%w_]+):%s*(.-)%s*$")
+        if key and value then
+          -- Handle nested keys (simple case for nested objects)
+          if value == "" then
+            current_section = key
+            result[current_section] = {}
+          else
+            if current_section then
+              result[current_section][key] = value
+            else
+              result[key] = value
+            end
+          end
+        elseif current_section then
+          -- Handle nested values (indented lines under a section)
+          local nested_key, nested_value = line:match("^%s+([%w_]+):%s*(.-)%s*$")
+          if nested_key and nested_value then
+            result[current_section][nested_key] = nested_value
+          end
+        end
+      end
+    end
+
+    return result
+  end
+
+  -- Find the repository root
+  local repo_root = vim.fs.find(".git", { upward = true, type = "directory" })[1]
+  if repo_root then
+    -- Get repository root directory
+    repo_root = vim.fn.fnamemodify(repo_root, ":h")
+    local lazygit_config_path = repo_root .. "/.git/lazygit.yml"
+
+    -- Check if the file exists
+    local file = io.open(lazygit_config_path, "r")
+    if file then
+      local content = file:read("*all")
+      file:close()
+
+      -- Parse YAML content
+      local parsed = parse_yaml(content)
+      if parsed and parsed.git then
+        return {
+          branchPrefix = parsed.git.branchPrefix or "",
+          commitPrefix = {
+            pattern = parsed.git.commitPrefix and parsed.git.commitPrefix.pattern or "",
+            replace = parsed.git.commitPrefix and parsed.git.commitPrefix.replace or "",
+          },
+        }
+      end
+    end
+  end
+
+  return nil
+end
+
 return {
   "folke/snacks.nvim",
   opts = {
@@ -44,16 +108,7 @@ return {
           editAtLineAndWait = "nvim +{{line}} {{filename}}",
           openDirInEditor = '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
         },
-        git = {
-          -- branchPrefix = "blabla",
-          -- git:
-          --   paging:
-          --     colorArg: always
-          --     pager: delta --dark --paging=never
-          -- paging = {
-          --   useConfig = true,
-          -- },
-        },
+        git = getGitConfig(),
       },
     },
     zen = {
