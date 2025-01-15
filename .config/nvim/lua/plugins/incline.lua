@@ -23,10 +23,7 @@ return {
         return {
           ft_icon and { "", guifg = ft_color } or "",
           ft_icon and { ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
-          " ",
-          { filename, guifg = modified and mocha.peach or mocha.text },
-          " ",
-          guibg = mocha.base,
+          { " ", filename, " ", guifg = modified and mocha.peach or mocha.text },
         }
       end,
     })
