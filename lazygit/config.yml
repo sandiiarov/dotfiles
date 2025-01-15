@@ -1,8 +1,0 @@
-gui:
-  border: "rounded"
-  nerdFontsVersion: "3"
-git:
-  branchPrefix: "feature/PPP-"
-  commitPrefix:
-    pattern: "feature\\/([A-Z]+-\\d+)"
-    replace: "$0 "
