@@ -24,7 +24,7 @@ return {
           ft_icon and { "", guifg = ft_color } or "",
           ft_icon and { ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
           " ",
-          { filename, gui = modified and "bold,italic" or "bold", guifg = modified and mocha.yellow or mocha.text },
+          { filename, guifg = modified and mocha.peach or mocha.text },
           " ",
           guibg = mocha.base,
         }
