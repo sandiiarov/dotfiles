@@ -151,7 +151,7 @@ local function find_file_paths()
   end
 
   if #found_paths == 0 then
-    print("No valid file paths found in current buffer.")
+    print("No valid file paths found in current buffer")
     return nil
   end
 
@@ -229,10 +229,10 @@ local function quick_open_mode(found_paths)
     -- Also remove <Esc> keymap
     pcall(vim.api.nvim_buf_del_keymap, 0, "n", "<Esc>")
 
-    print("Exited quick-open mode.")
+    print("Exited find file paths mode")
   end
 
-  vim.keymap.set("n", "<Esc>", exit_quick_open_mode, { buffer = 0, desc = "Exit quick-open mode" })
+  vim.keymap.set("n", "<Esc>", exit_quick_open_mode, { buffer = 0, desc = "Exit find file paths mode" })
 end
 
 --------------------------------------------------------------------------------
@@ -247,4 +247,4 @@ local function find_paths_and_quick_open()
   quick_open_mode(found_paths)
 end
 
-map("n", "<leader>fp", find_paths_and_quick_open, { desc = "Find file paths in buffer & quick open" })
+map("n", "<leader>fp", find_paths_and_quick_open, { desc = "Find file paths" })

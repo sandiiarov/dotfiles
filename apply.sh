@@ -29,8 +29,8 @@ backup_and_copy() {
 
   if [[ -e "$dest" || -L "$dest" ]]; then
     local filename
-    # For example: "myfile-05.23.24-12:03PM"
-    filename="$(basename "$dest")-$(date +%m.%d.%y-%I:%M%p)"
+    # For example: "myfile-05.23.24-12:03:55PM"
+    filename="$(basename "$dest")-$(date +%m.%d.%y-%I:%M:%S%p)"
     local backup_path="$BACKUP_DIR/$filename"
 
     echo "[INFO] Backing up existing: $dest -> $backup_path"

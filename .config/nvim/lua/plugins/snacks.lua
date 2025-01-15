@@ -1,9 +1,11 @@
 return {
   "folke/snacks.nvim",
-  priority = 1000,
-  lazy = false,
-  requires = "SmiteshP/nvim-navic",
   opts = {
+    styles = {
+      zoom_indicator = {
+        text = " ",
+      },
+    },
     indent = { enabled = false },
     scroll = { enabled = false },
     terminal = {
@@ -12,6 +14,9 @@ return {
           winbar = "",
         },
       },
+    },
+    notifier = {
+      top_down = false,
     },
     dashboard = {
       preset = {
@@ -26,6 +31,14 @@ return {
 ██████  █████████████████████ ████ █████ █████ ████ ██████
 ]],
       },
+    },
+    zen = {
+      on_open = function()
+        require("incline").disable()
+      end,
+      on_close = function()
+        require("incline").enable()
+      end,
     },
   },
 }
