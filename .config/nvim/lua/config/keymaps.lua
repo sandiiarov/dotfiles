@@ -9,10 +9,6 @@ map("n", "<C-S-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-S-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-S-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
---------------------------------------------------------------------------------
--- Helpers
---------------------------------------------------------------------------------
-
 local function get_lazy_root()
   local ok, lazy_config = pcall(require, "lazy.core.config")
   if ok and lazy_config and lazy_config.options and lazy_config.options.root then
@@ -23,7 +19,7 @@ local function get_lazy_root()
 end
 
 local function get_cwd()
-  return vim.loop.cwd() -- or vim.fn.getcwd()
+  return vim.loop.cwd()
 end
 
 local function expand_tilde(path)
@@ -59,9 +55,6 @@ local function file_exists(path)
   return stat ~= nil and stat.type == "file"
 end
 
---------------------------------------------------------------------------------
---  "check or trim"
---------------------------------------------------------------------------------
 local function try_trim_and_check(path)
   if file_exists(path) then
     return path
@@ -94,9 +87,6 @@ local function try_trim_and_check(path)
   return nil
 end
 
---------------------------------------------------------------------------------
---  Regex/pattern for raw paths in lines
---------------------------------------------------------------------------------
 local function extract_raw_paths_from_line(line)
   local path_pattern = "[~%./]?[%w%-%_%.%/:]+"
   local results = {}
@@ -106,11 +96,10 @@ local function extract_raw_paths_from_line(line)
   return results
 end
 
---------------------------------------------------------------------------------
---  Find file paths
---  Returns: { { match, path_to_open, line_nr, start_col, end_col }, ... }
---------------------------------------------------------------------------------
 local function find_file_paths()
+  local buf = vim.api.nvim_get_current_buf()
+  local extmarks = require("snacks.picker.util.highlight").get_highlights({ buf = buf })
+
   local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
   local found_paths = {}
 
@@ -139,11 +128,13 @@ local function find_file_paths()
         local s, e = string.find(line, raw_path, 1, true)
         if s then
           table.insert(found_paths, {
-            match = raw_path,
-            path_to_open = actual_path,
-            line_nr = line_nr - 1, -- 0-based
-            start_col = s - 1, -- 0-based
-            end_col = e, -- for highlight
+            buf = buf,
+            file = raw_path,
+            text = raw_path,
+            path = actual_path,
+            pos = { line_nr, s },
+            end_pos = { line_nr, e + 1 },
+            highlights = extmarks[line_nr],
           })
         end
       end
@@ -158,93 +149,23 @@ local function find_file_paths()
   return found_paths
 end
 
---------------------------------------------------------------------------------
---  Quick-Open Mode
---  (Label only unique paths, but don't skip duplicates => same label for dups)
---------------------------------------------------------------------------------
+local function pick_file_paths()
+  local paths = find_file_paths()
 
-local function quick_open_mode(found_paths)
-  local ns_id = vim.api.nvim_create_namespace("QuickOpenPathsNS")
-  local label_map = {} -- label -> path
-  local path_label_map = {} -- path -> label
-  local label_counter = 1 -- to assign 'a', 'b', 'c', etc.
-
-  -- 1) Highlight each path
-  for _, entry in ipairs(found_paths) do
-    vim.api.nvim_buf_add_highlight(0, ns_id, "String", entry.line_nr, entry.start_col, entry.end_col)
-  end
-
-  -- 2) Assign letters to each unique path & add extmarks for each occurrence
-  for _, entry in ipairs(found_paths) do
-    local path = entry.path_to_open
-    local label = path_label_map[path]
-
-    -- If this is a new (unique) path, assign a new letter
-    if not label then
-      -- Only handle up to 26 unique paths
-      if label_counter > 26 then
-        break
-      end
-      label = string.char(96 + label_counter) -- 1->'a', 2->'b', ...
-      label_counter = label_counter + 1
-
-      path_label_map[path] = label
-      label_map[label] = path
-    end
-
-    -- Now place the label right before the path text using an extmark
-    vim.api.nvim_buf_set_extmark(0, ns_id, entry.line_nr, entry.start_col, {
-      virt_text = { { label, "Search" } },
-      virt_text_pos = "overlay",
-    })
-  end
-
-  -- 3) "Open path" function
-  local function open_path(path)
-    vim.cmd("edit " .. vim.fn.fnameescape(path))
-  end
-
-  -- 4) Create a keymap for each label => open file
-  for label, path in pairs(label_map) do
-    vim.keymap.set("n", label, function()
-      open_path(path)
-      -- If you want to exit mode immediately after opening a path, you could:
-      -- exit_quick_open_mode()
-    end, {
-      buffer = 0,
-      nowait = true,
-      silent = true,
-      desc = "Quick open: " .. path,
-    })
-  end
-
-  -- 5) <Esc> to exit quick-open mode: clear highlights, unmap
-  local function exit_quick_open_mode()
-    vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
-
-    -- Remove all letter keymaps
-    for label, _ in pairs(label_map) do
-      pcall(vim.api.nvim_buf_del_keymap, 0, "n", label)
-    end
-    -- Also remove <Esc> keymap
-    pcall(vim.api.nvim_buf_del_keymap, 0, "n", "<Esc>")
-
-    print("Exited find file paths mode")
-  end
-
-  vim.keymap.set("n", "<Esc>", exit_quick_open_mode, { buffer = 0, desc = "Exit find file paths mode" })
-end
-
---------------------------------------------------------------------------------
---  Main function: find paths & start quick-open mode
---------------------------------------------------------------------------------
-
-local function find_paths_and_quick_open()
-  local found_paths = find_file_paths()
-  if not found_paths or #found_paths == 0 then
+  if paths == nil then
     return
   end
-  quick_open_mode(found_paths)
+
+  Snacks.picker.pick({
+    source = "file_paths",
+    items = paths,
+    actions = {
+      confirm = function(picker, item)
+        picker:close()
+        vim.cmd("edit " .. item.path)
+      end,
+    },
+  })
 end
 
-map("n", "<leader>fp", find_paths_and_quick_open, { desc = "Find file paths" })
+map("n", "<leader>fp", pick_file_paths, { desc = "Find file paths" })
