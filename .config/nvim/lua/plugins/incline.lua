@@ -18,12 +18,13 @@ return {
         end
 
         local ft_icon, ft_color = devicons.get_icon_color(filename)
+        local modified = vim.bo[props.buf].modified
 
         return {
           ft_icon and { "", guifg = ft_color } or "",
           ft_icon and { ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
           " ",
-          { filename, gui = vim.bo[props.buf].modified and "bold,italic" or "bold" },
+          { filename, gui = modified and "bold,italic" or "bold", guifg = modified and mocha.yellow or mocha.text },
           " ",
           guibg = mocha.base,
         }
