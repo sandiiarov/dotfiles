@@ -34,9 +34,6 @@ return {
     },
     lazygit = {
       config = {
-        gui = {
-          nerdFontsVersion = "3",
-        },
         os = {
           open = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
           edit = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
