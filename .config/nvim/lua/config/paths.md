@@ -16,3 +16,4 @@
 1. /.config/nvim/lua/nonexistent-file.lua
 2. /plugins/wrong-folder/wrong-file.lua
 3. .config/nvim/lua
+4. ~/.npmrc

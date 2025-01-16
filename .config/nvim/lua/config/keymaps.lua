@@ -156,6 +156,10 @@ local function pick_file_paths()
     return
   end
 
+  table.sort(paths, function(a, b)
+    return a.path < b.path
+  end)
+
   Snacks.picker.pick({
     source = "file_paths",
     items = paths,
