@@ -1,4 +1,4 @@
-local function getGitConfig()
+local function getLazyGitConfig()
   local function parse_yaml(content)
     local result = {}
     local current_section
@@ -32,8 +32,22 @@ local function getGitConfig()
     return result
   end
 
+  local config = {
+    gui = {
+      nerdFontsVersion = "3",
+    },
+    os = {
+      open = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
+      edit = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
+      editAtLine = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server $NVIM --remote-send "q" &&  nvim --server $NVIM --remote {{filename}} && nvim --server $NVIM --remote-send ":{{line}}<CR>")',
+      editAtLineAndWait = "nvim +{{line}} {{filename}}",
+      openDirInEditor = '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
+    },
+  }
+
   -- Find the repository root
   local repo_root = vim.fs.find(".git", { upward = true, type = "directory" })[1]
+
   if repo_root then
     -- Get repository root directory
     repo_root = vim.fn.fnamemodify(repo_root, ":h")
@@ -41,25 +55,29 @@ local function getGitConfig()
 
     -- Check if the file exists
     local file = io.open(lazygit_config_path, "r")
+    print(file)
     if file then
       local content = file:read("*all")
       file:close()
 
       -- Parse YAML content
       local parsed = parse_yaml(content)
-      if parsed and parsed.git then
-        return {
-          branchPrefix = parsed.git.branchPrefix or "",
-          commitPrefix = {
-            pattern = parsed.git.commitPrefix and parsed.git.commitPrefix.pattern or "",
-            replace = parsed.git.commitPrefix and parsed.git.commitPrefix.replace or "",
-          },
-        }
-      end
+
+      print(vim.inspect(parsed))
+
+      -- if parsed and parsed.git then
+      --   config.git.branchPrefix = parsed.git.branchPrefix or ""
+      --   config.git.commitPrefix.pattern = parsed.git.commitPrefix and parsed.git.commitPrefix.pattern or ""
+      --   config.git.commitPrefix.replace = parsed.git.commitPrefix and parsed.git.commitPrefix.replace or ""
+      -- end
+
+      -- if parsed and parsed.customCommands then
+      --   config.customCommands = parsed.customCommands
+      -- end
     end
   end
 
-  return nil
+  return config
 end
 
 return {
@@ -97,19 +115,7 @@ return {
       },
     },
     lazygit = {
-      config = {
-        gui = {
-          nerdFontsVersion = "3",
-        },
-        os = {
-          open = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
-          edit = '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})',
-          editAtLine = '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server $NVIM --remote-send "q" &&  nvim --server $NVIM --remote {{filename}} && nvim --server $NVIM --remote-send ":{{line}}<CR>")',
-          editAtLineAndWait = "nvim +{{line}} {{filename}}",
-          openDirInEditor = '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})',
-        },
-        git = getGitConfig(),
-      },
+      config = getLazyGitConfig(),
     },
     zen = {
       on_open = function()
