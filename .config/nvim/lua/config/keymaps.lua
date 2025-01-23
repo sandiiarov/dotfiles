@@ -146,6 +146,10 @@ local function find_file_paths()
     return nil
   end
 
+  table.sort(found_paths, function(a, b)
+    return a.path < b.path
+  end)
+
   return found_paths
 end
 
@@ -155,10 +159,6 @@ local function pick_file_paths()
   if paths == nil then
     return
   end
-
-  table.sort(paths, function(a, b)
-    return a.path < b.path
-  end)
 
   Snacks.picker.pick({
     source = "file_paths",

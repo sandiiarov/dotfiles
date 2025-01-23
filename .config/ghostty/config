@@ -1,13 +1,18 @@
 ## Window
 window-decoration = false
-mouse-hide-while-typing = true
+window-padding-balance = true
+window-save-state = always
 window-padding-x = 0
 window-padding-y = 0
+window-colorspace = display-p3
 macos-window-shadow = false
 macos-non-native-fullscreen = true
 
+## Mouse
+mouse-hide-while-typing = true
+
 ## Clipboard
-clipboard-read = "allow"
+clipboard-read = allow
 clipboard-paste-protection = false
 
 ## Background
