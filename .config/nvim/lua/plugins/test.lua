@@ -12,6 +12,12 @@ return {
           return root_path or vim.fn.getcwd()
         end,
       },
+      ["neotest-vitest"] = {
+        cwd = function(path)
+          local root_path = require("lspconfig").util.root_pattern("package.json")(path)
+          return root_path or vim.fn.getcwd()
+        end,
+      },
     },
   },
 }
