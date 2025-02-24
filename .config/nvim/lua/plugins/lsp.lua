@@ -16,6 +16,7 @@ return {
           "javascriptreact",
           "typescript",
           "typescriptreact",
+          "json",
           "graphql",
         },
       },
