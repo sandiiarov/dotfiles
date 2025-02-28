@@ -20,6 +20,8 @@ return {
           "graphql",
         },
       },
+      cssls = {},
+      cssmodules_ls = {},
       stylelint_lsp = {
         filetypes = {
           "css",
