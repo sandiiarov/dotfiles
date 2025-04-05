@@ -100,35 +100,87 @@
   padding: 0 2px !important;
   top: 4px !important;
 }
+
+/* Cursor in sidebar */
+.explorer-viewlet
+  .monaco-list:focus
+  .monaco-list-row.focused:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
+}
+.explorer-viewlet
+  .monaco-list
+  .monaco-list-row.selected:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
+}
+.explorer-viewlet
+  .monaco-list
+  .monaco-list-row.selected:not(.monaco-tree-sticky-row)
+  .monaco-tl-indent {
+  width: 2px !important;
+  left: -2px;
+  background: #cba7f7;
+}
 .explorer-viewlet
   .monaco-list:focus
   .monaco-list-row.focused:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
-  box-shadow: -12px 0px var(--vscode-list-activeSelectionBackground),
-    -20px 0px #f5e0dc;
-  min-width: 8px;
+  width: 8px !important;
+  background-color: #f5e0dc;
+  left: -2px;
+  animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
 }
-.output-view .view-lines {
-  font-size: 11px !important;
-  line-height: 14px !important;
+
+.scm-view
+  .monaco-list:focus
+  .monaco-list-row.focused:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
 }
-.quick-input-widget {
-  border: 1px solid var(--vscode-focusBorder) !important;
-  top: 10% !important;
+.scm-view .monaco-list .monaco-list-row.selected:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
+}
+.scm-view
+  .monaco-list
+  .monaco-list-row.selected:not(.monaco-tree-sticky-row)
+  .monaco-tl-indent {
+  width: 2px !important;
+  left: -2px;
+  background: #cba7f7;
 }
 .scm-view
   .monaco-list:focus
   .monaco-list-row.focused:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
-  box-shadow: -8px 0px var(--vscode-list-activeSelectionBackground),
-    -16px 0px #f5e0dc;
-  min-width: 8px;
+  width: 8px !important;
+  background-color: #f5e0dc;
+  left: -2px;
+  animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
+}
+
+.search-view
+  .search-view
+  .monaco-list:focus
+  .monaco-list-row.focused:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
+}
+.search-view
+  .monaco-list
+  .monaco-list-row.selected:not(.monaco-tree-sticky-row) {
+  background-color: transparent !important;
+}
+.search-view
+  .monaco-list
+  .monaco-list-row.selected:not(.monaco-tree-sticky-row)
+  .monaco-tl-indent {
+  width: 2px !important;
+  left: 2px;
+  background: #cba7f7;
 }
 .search-view
   .monaco-list:focus
   .monaco-list-row.focused:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
-  box-shadow: -8px 0px var(--vscode-list-activeSelectionBackground),
-    -16px 0px #f5e0dc;
-  min-width: 8px;
+  width: 8px !important;
+  background-color: #f5e0dc;
+  left: 2px;
+  animation: monaco-cursor-smooth 0.8s ease-in-out 0s 20 alternate;
 }
