@@ -12,12 +12,33 @@
   width: 4px !important;
   left: auto !important;
   right: 4px !important;
+  border-radius: 4px;
+  opacity: 0.3;
 }
-.monaco-sash.vertical:not(.disabled)::before {
+.monaco-list .slider {
+  right: 8px !important;
+}
+.sash-container .monaco-sash.vertical::before {
+  transform: translateX(2px);
   background-color: var(--vscode-input-background);
 }
-.split-view-container .monaco-sash.horizontal::before {
+.sash-container .monaco-sash.horizontal::before {
+  transform: translateY(2px);
   background-color: var(--vscode-input-background);
+}
+.monaco-grid-branch-node
+  .sash-container
+  .monaco-sash:nth-child(3).vertical::before {
+  transform: translateX(-2px);
+}
+.monaco-grid-branch-node
+  .sash-container
+  .monaco-sash:nth-child(3).horizontal::before {
+  transform: translate(2px, -2px);
+}
+.decorationsOverviewRuler::before {
+  background-color: var(--vscode-input-background);
+  border-radius: 2px;
 }
 .xterm-decoration-overview-ruler {
   clip-path: inset(1px 1px 1px 1px);
@@ -101,6 +122,26 @@
   top: 4px !important;
 }
 
+/* Activity Bar */
+.composite-bar {
+  margin: auto;
+}
+
+/* Ruler */
+.decorationsOverviewRuler {
+  box-shadow: 0px 0px 20px 8px var(--vscode-scrollbar-shadow);
+}
+
+/* Terminal */
+.panel .content {
+  margin-top: -4px;
+}
+
+/* Shadow */
+.scroll-decoration {
+  display: none !important;
+}
+
 /* Cursor in sidebar */
 .explorer-viewlet
   .monaco-list:focus
@@ -117,7 +158,7 @@
   .monaco-list-row.selected:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
   width: 2px !important;
-  left: -2px;
+  left: 0px;
   background: #cba7f7;
 }
 .explorer-viewlet
@@ -126,7 +167,7 @@
   .monaco-tl-indent {
   width: 8px !important;
   background-color: #f5e0dc;
-  left: -2px;
+  left: 0px;
   animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
 }
 
@@ -143,7 +184,7 @@
   .monaco-list-row.selected:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
   width: 2px !important;
-  left: -2px;
+  left: 0px;
   background: #cba7f7;
 }
 .scm-view
@@ -152,7 +193,7 @@
   .monaco-tl-indent {
   width: 8px !important;
   background-color: #f5e0dc;
-  left: -2px;
+  left: 0px;
   animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
 }
 
@@ -172,7 +213,7 @@
   .monaco-list-row.selected:not(.monaco-tree-sticky-row)
   .monaco-tl-indent {
   width: 2px !important;
-  left: 2px;
+  left: 4px;
   background: #cba7f7;
 }
 .search-view
@@ -181,6 +222,6 @@
   .monaco-tl-indent {
   width: 8px !important;
   background-color: #f5e0dc;
-  left: 2px;
-  animation: monaco-cursor-smooth 0.8s ease-in-out 0s 20 alternate;
+  left: 4px;
+  animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
 }
