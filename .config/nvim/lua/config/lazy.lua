@@ -43,6 +43,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
 
     { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
+    { import = "lazyvim.plugins.extras.ui.smear-cursor" },
 
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
 

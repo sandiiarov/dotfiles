@@ -4,7 +4,7 @@ return {
   config = function()
     require("scrollbar").setup({
       handlers = {
-        cursor = false,
+        cursor = true,
         diagnostic = true,
         gitsigns = true,
         handle = false,

@@ -7,7 +7,7 @@ return {
       },
     },
     indent = { enabled = false },
-    scroll = { enabled = false },
+    scroll = { enabled = true },
     terminal = {
       win = {
         wo = {
