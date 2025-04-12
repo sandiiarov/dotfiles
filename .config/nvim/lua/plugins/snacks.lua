@@ -51,5 +51,10 @@ return {
         require("incline").enable()
       end,
     },
+    words = {
+      debounce = 0,
+      notify_end = false,
+      modes = { "n" },
+    },
   },
 }
