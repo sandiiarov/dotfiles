@@ -16,7 +16,7 @@ return {
 
       -- Cache for git status
       local gitStatusCache = {}
-      local cacheTimeout = 0 -- in milliseconds
+      local cacheTimeout = 2000 -- in milliseconds
       local uv = vim.uv or vim.loop
 
       local function isSymlink(path)
@@ -28,24 +28,26 @@ return {
       ---@param status string
       ---@return string symbol, string hlGroup
       local function mapSymbols(status, is_symlink)
+        local icons = LazyVim.config.icons
+
         local statusMap = {
-          [" M"] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
-          ["M "] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- modified in index
-          ["MM"] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
-          ["A "] = { symbol = "", hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
-          ["AA"] = { symbol = "", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
-          ["D "] = { symbol = "", hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
-          ["AM"] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
-          ["AD"] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
-          ["R "] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
-          ["U "] = { symbol = "", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
-          ["UU"] = { symbol = "", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
-          ["UA"] = { symbol = "", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
-          ["??"] = { symbol = "", hlGroup = "MiniDiffSignAdd" }, -- Untracked files
-          ["!!"] = { symbol = "", hlGroup = "NonText" }, -- Ignored files
+          [" M"] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
+          ["M "] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- modified in index
+          ["MM"] = { symbol = "MM", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
+          ["A "] = { symbol = "A", hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
+          ["AA"] = { symbol = "AA", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
+          ["D "] = { symbol = "D", hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
+          ["AM"] = { symbol = "AM", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
+          ["AD"] = { symbol = "AD", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
+          ["R "] = { symbol = "R", hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
+          ["U "] = { symbol = "U", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
+          ["UU"] = { symbol = "UU", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
+          ["UA"] = { symbol = "UA", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
+          ["??"] = { symbol = "??", hlGroup = "MiniDiffSignDelete" }, -- Untracked files
+          ["!!"] = { symbol = "!!", hlGroup = "NonText" }, -- Ignored files
         }
 
-        local result = statusMap[status] or { symbol = "", hlGroup = "NonText" }
+        local result = statusMap[status] or { symbol = "", hlGroup = "" }
         local gitSymbol = result.symbol
         local gitHlGroup = result.hlGroup
 
@@ -96,8 +98,9 @@ return {
             if status then
               local symbol, hlGroup = mapSymbols(status, isSymlink(entry.path))
               vim.api.nvim_buf_set_extmark(buf_id, nsMiniFiles, i - 1, 0, {
-                sign_text = symbol,
-                sign_hl_group = hlGroup,
+                virt_text = { { symbol, hlGroup } }, -- Add a space for padding, format: {{text, hl_group}}
+                virt_text_pos = "right_align", -- Position at the end of the line
+                hl_mode = "combine",
                 priority = 2,
               })
               -- This below code is responsible for coloring the text of the items. comment it out if you don't want that
