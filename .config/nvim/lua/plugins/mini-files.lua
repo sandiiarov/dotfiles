@@ -31,20 +31,20 @@ return {
         local icons = LazyVim.config.icons
 
         local statusMap = {
-          [" M"] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
-          ["M "] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- modified in index
-          ["MM"] = { symbol = "MM", hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
-          ["A "] = { symbol = "A", hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
-          ["AA"] = { symbol = "AA", hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
-          ["D "] = { symbol = "D", hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
-          ["AM"] = { symbol = "AM", hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
-          ["AD"] = { symbol = "AD", hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
-          ["R "] = { symbol = "R", hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
-          ["U "] = { symbol = "U", hlGroup = "MiniDiffSignChange" }, -- Unmerged path
-          ["UU"] = { symbol = "UU", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
-          ["UA"] = { symbol = "UA", hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
-          ["??"] = { symbol = "??", hlGroup = "MiniDiffSignDelete" }, -- Untracked files
-          ["!!"] = { symbol = "!!", hlGroup = "NonText" }, -- Ignored files
+          [" M"] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
+          ["M "] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- modified in index
+          ["MM"] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- modified in both working tree and index
+          ["A "] = { symbol = icons.git.added, hlGroup = "MiniDiffSignAdd" }, -- Added to the staging area, new file
+          ["AA"] = { symbol = icons.git.added, hlGroup = "MiniDiffSignAdd" }, -- file is added in both working tree and index
+          ["D "] = { symbol = icons.git.removed, hlGroup = "MiniDiffSignDelete" }, -- Deleted from the staging area
+          ["AM"] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- added in working tree, modified in index
+          ["AD"] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- Added in the index and deleted in the working directory
+          ["R "] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- Renamed in the index
+          ["U "] = { symbol = icons.git.modified, hlGroup = "MiniDiffSignChange" }, -- Unmerged path
+          ["UU"] = { symbol = icons.git.added, hlGroup = "MiniDiffSignAdd" }, -- file is unmerged
+          ["UA"] = { symbol = icons.git.added, hlGroup = "MiniDiffSignAdd" }, -- file is unmerged and added in working tree
+          ["??"] = { symbol = icons.git.removed, hlGroup = "MiniDiffSignDelete" }, -- Untracked files
+          ["!!"] = { symbol = "", hlGroup = "NonText" }, -- Ignored files
         }
 
         local result = statusMap[status] or { symbol = "", hlGroup = "" }
