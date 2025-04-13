@@ -3,10 +3,11 @@ return {
   event = "BufReadPost",
   config = function()
     require("scrollbar").setup({
+      show_in_active_only = true,
       handlers = {
-        cursor = true,
+        cursor = false,
         diagnostic = true,
-        gitsigns = true,
+        gitsigns = false,
         handle = false,
         search = false,
         ale = false,
