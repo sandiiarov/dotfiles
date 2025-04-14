@@ -1,4 +1,4 @@
-local catppuccin = require("catppuccin.palettes").get_palette()
+local catppuccin = require("catppuccin.palettes").get_palette("mocha")
 
 return {
   "vuki656/package-info.nvim",

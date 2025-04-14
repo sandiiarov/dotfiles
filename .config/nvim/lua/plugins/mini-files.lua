@@ -28,8 +28,6 @@ return {
       ---@param status string
       ---@return string symbol, string hlGroup
       local function mapSymbols(status, is_symlink)
-        local icons = LazyVim.config.icons
-
         local statusMap = {
           [" M"] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
           ["M "] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- modified in index

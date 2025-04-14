@@ -3,7 +3,7 @@ return {
   config = function()
     local helpers = require("incline.helpers")
     local devicons = require("nvim-web-devicons")
-    local mocha = require("catppuccin.palettes").get_palette("mocha")
+    local catppuccin = require("catppuccin.palettes").get_palette("mocha")
 
     require("incline").setup({
       window = {
@@ -23,7 +23,7 @@ return {
         return {
           ft_icon and { "", guifg = ft_color } or "",
           ft_icon and { ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
-          { " ", filename, " ", guifg = modified and mocha.peach or mocha.text },
+          { " ", filename, " ", guifg = modified and catppuccin.peach or catppuccin.text },
         }
       end,
     })
