@@ -90,7 +90,11 @@ return {
             if not entry then
               break
             end
+
             local relativePath = entry.path:gsub("^" .. escapedcwd .. "/", "")
+            if entry.fs_type == "directory" then
+              relativePath = relativePath .. "/"
+            end
             local status = gitStatusMap[relativePath]
 
             if status then
@@ -126,30 +130,7 @@ return {
         -- lua match is faster than vim.split (in my experience )
         for line in content:gmatch("[^\r\n]+") do
           local status, filePath = string.match(line, "^(..)%s+(.*)")
-          -- Split the file path into parts
-          local parts = {}
-          for part in filePath:gmatch("[^/]+") do
-            table.insert(parts, part)
-          end
-          -- Start with the root directory
-          local currentKey = ""
-          for i, part in ipairs(parts) do
-            if i > 1 then
-              -- Concatenate parts with a separator to create a unique key
-              currentKey = currentKey .. "/" .. part
-            else
-              currentKey = part
-            end
-            -- If it's the last part, it's a file, so add it with its status
-            if i == #parts then
-              gitStatusMap[currentKey] = status
-            else
-              -- If it's not the last part, it's a directory. Check if it exists, if not, add it.
-              if not gitStatusMap[currentKey] then
-                gitStatusMap[currentKey] = status
-              end
-            end
-          end
+          gitStatusMap[filePath] = status
         end
         return gitStatusMap
       end
