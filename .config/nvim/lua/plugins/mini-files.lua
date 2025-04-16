@@ -14,9 +14,8 @@ return {
       local autocmd = vim.api.nvim_create_autocmd
       local _, MiniFiles = pcall(require, "mini.files")
 
-      -- Cache for git status
       local gitStatusCache = {}
-      local cacheTimeout = 2000 -- in milliseconds
+      local cacheTimeout = 2000
       local uv = vim.uv or vim.loop
 
       local function isSymlink(path)
@@ -24,9 +23,6 @@ return {
         return stat and stat.type == "link"
       end
 
-      ---@type table<string, {symbol: string, hlGroup: string}>
-      ---@param status string
-      ---@return string symbol, string hlGroup
       local function mapSymbols(status, is_symlink)
         local statusMap = {
           [" M"] = { symbol = "M", hlGroup = "MiniDiffSignChange" }, -- Modified in the working directory
@@ -51,37 +47,26 @@ return {
 
         local symlinkSymbol = is_symlink and "↩" or ""
 
-        -- Combine symlink symbol with Git status if both exist
         local combinedSymbol = (symlinkSymbol .. gitSymbol):gsub("^%s+", ""):gsub("%s+$", "")
-        -- Change the color of the symlink icon from "MiniDiffSignDelete" to something else
         local combinedHlGroup = is_symlink and "MiniDiffSignDelete" or gitHlGroup
 
         return combinedSymbol, combinedHlGroup
       end
 
-      ---@param cwd string
-      ---@param callback function
-      ---@return nil
       local function fetchGitStatus(cwd, callback)
         local clean_cwd = cwd:gsub("^minifiles://%d+/", "")
-        ---@param content table
         local function on_exit(content)
           if content.code == 0 then
             callback(content.stdout)
-            -- vim.g.content = content.stdout
           end
         end
-        ---@see vim.system
         vim.system({ "git", "status", "--ignored", "--porcelain" }, { text = true, cwd = clean_cwd }, on_exit)
       end
 
-      ---@param buf_id integer
-      ---@param gitStatusMap table
-      ---@return nil
       local function updateMiniWithGit(buf_id, gitStatusMap)
         vim.schedule(function()
           local nlines = vim.api.nvim_buf_line_count(buf_id)
-          local cwd = vim.fs.root(buf_id, ".git")
+          local cwd = vim.fn.getcwd()
           local escapedcwd = cwd and vim.pesc(cwd)
           escapedcwd = vim.fs.normalize(escapedcwd)
 
@@ -100,14 +85,12 @@ return {
             if status then
               local symbol, hlGroup = mapSymbols(status, isSymlink(entry.path))
               vim.api.nvim_buf_set_extmark(buf_id, nsMiniFiles, i - 1, 0, {
-                virt_text = { { symbol, hlGroup } }, -- Add a space for padding, format: {{text, hl_group}}
-                virt_text_pos = "right_align", -- Position at the end of the line
+                virt_text = { { symbol, hlGroup } },
+                virt_text_pos = "right_align",
                 hl_mode = "combine",
                 priority = 2,
               })
-              -- This below code is responsible for coloring the text of the items. comment it out if you don't want that
               local line = vim.api.nvim_buf_get_lines(buf_id, i - 1, i, false)[1]
-              -- Find the name position accounting for potential icons
               local nameStartCol = line:find(vim.pesc(entry.name)) or 0
 
               if nameStartCol > 0 then
@@ -122,12 +105,8 @@ return {
         end)
       end
 
-      -- Thanks for the idea of getting https://github.com/refractalize/oil-git-status.nvim signs for dirs
-      ---@param content string
-      ---@return table
       local function parseGitStatus(content)
         local gitStatusMap = {}
-        -- lua match is faster than vim.split (in my experience )
         for line in content:gmatch("[^\r\n]+") do
           local status, filePath = string.match(line, "^(..)%s+(.*)")
           gitStatusMap[filePath] = status
@@ -135,8 +114,6 @@ return {
         return gitStatusMap
       end
 
-      ---@param buf_id integer
-      ---@return nil
       local function updateGitStatus(buf_id)
         if not vim.fs.root(buf_id, ".git") then
           return
@@ -159,7 +136,6 @@ return {
         end
       end
 
-      ---@return nil
       local function clearCache()
         gitStatusCache = {}
       end
