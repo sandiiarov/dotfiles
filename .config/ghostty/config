@@ -29,10 +29,11 @@ quick-terminal-position = bottom
 quick-terminal-autohide = false
 
 ## Keybinds
+keybind = cmd+d=ignore
 # keybind = cmd+a=text:\x01
 # keybind = cmd+b=text:\x02
 # keybind = cmd+c=text:\x03
-# keybind = cmd+d=text:\x04
+keybind = cmd+d=text:\x04
 # keybind = cmd+e=text:\x05
 # keybind = cmd+f=text:\x06
 # keybind = cmd+g=text:\x07

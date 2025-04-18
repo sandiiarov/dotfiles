@@ -11,11 +11,3 @@ map("n", "<C-S-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Wid
 
 -- Restart LSP
 map("n", "<leader>cq", "<cmd>LspRestart<cr>", { desc = "Lsp Restart" })
-
--- Jump to next/previous definition
-map("n", "<S-n>", function()
-  Snacks.words.jump(vim.v.count1, true)
-end)
-map("n", "<S-p>", function()
-  Snacks.words.jump(-vim.v.count1, true)
-end)
