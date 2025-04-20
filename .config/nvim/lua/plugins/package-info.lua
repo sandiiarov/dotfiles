@@ -8,8 +8,16 @@ return {
   ft = "json",
   opts = {
     colors = {
-      up_to_date = catppuccin.teal,
-      outdated = catppuccin.maroon,
+      up_to_date = catppuccin.surface1,
+      outdated = catppuccin.surface1,
+      invalid = catppuccin.maroon,
+    },
+    icons = {
+      style = {
+        up_to_date = "  ",
+        outdated = " 󰚰 ",
+        invalid = " 󰈅 ",
+      },
     },
   },
   config = function(_, opts)
