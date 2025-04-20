@@ -1,15 +1,15 @@
 local catppuccin = require("catppuccin.palettes").get_palette("mocha")
 
 return {
-  "vuki656/package-info.nvim",
+  "sandiiarov/package-info.nvim",
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
   ft = "json",
   opts = {
     colors = {
-      up_to_date = catppuccin.green,
-      outdated = catppuccin.red,
+      up_to_date = catppuccin.teal,
+      outdated = catppuccin.maroon,
     },
   },
   config = function(_, opts)

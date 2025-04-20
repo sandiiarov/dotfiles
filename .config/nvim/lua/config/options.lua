@@ -4,3 +4,4 @@
 
 vim.g.root_spec = { ".git" }
 vim.g.lazyvim_picker = "snacks"
+vim.g.lazyvim_prettier_needs_config = true
