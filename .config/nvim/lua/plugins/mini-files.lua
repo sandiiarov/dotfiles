@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     config = function(_, opts)
       require("mini.files").setup(opts)
 

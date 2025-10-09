@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  version = "*",
   opts = {
     inlay_hints = {
       enabled = false,
@@ -26,14 +27,14 @@ return {
         filetypes = {
           "css",
           "scss",
-          "less",
-          "sass",
-          "vue",
-          "html",
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
+          -- "less",
+          -- "sass",
+          -- "vue",
+          -- "html",
+          -- "javascript",
+          -- "javascriptreact",
+          -- "typescript",
+          -- "typescriptreact",
         },
         settings = {
           stylelintplus = {
