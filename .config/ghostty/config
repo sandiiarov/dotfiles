@@ -24,9 +24,10 @@ theme = catppuccin-mocha
 font-family = JetBrains Mono
 font-size = 13
 
-## Quick Terminal
-quick-terminal-position = bottom
-quick-terminal-autohide = false
+# keybind = performable:cmd+h=goto_split:left
+# keybind = performable:cmd+j=goto_split:down
+# keybind = performable:cmd+k=goto_split:up
+# keybind = performable:cmd+l=goto_split:right
 
 ## Keybinds
 keybind = cmd+d=ignore
