@@ -3,16 +3,9 @@
   "mcp": {
     "exa": {
       "enabled": true,
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "mcp-remote",
-        "https://mcp.exa.ai/mcp"
-      ],
-      "environment": {
-        "EXA_API_KEY": "{env:EXA_API_KEY}"
-      }
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "headers": {}
     },
     "github_grep": {
       "type": "remote",
