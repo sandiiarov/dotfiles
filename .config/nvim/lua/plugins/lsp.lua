@@ -27,14 +27,14 @@ return {
         filetypes = {
           "css",
           "scss",
-          -- "less",
-          -- "sass",
-          -- "vue",
-          -- "html",
-          -- "javascript",
-          -- "javascriptreact",
-          -- "typescript",
-          -- "typescriptreact",
+          "less",
+          "sass",
+          "vue",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
         },
         settings = {
           stylelintplus = {

@@ -95,7 +95,13 @@ backup_and_copy "$DOTFILES_DIR/.fzf.zsh" "$HOME/.fzf.zsh"
 # 3. Replace (back up + copy) everything under .zsh
 sync_dir_contents "$DOTFILES_DIR/zsh-plugins" "$HOME/.zsh"
 
-# 4. Replace (back up + copy) everything under .config
+# 4. Replace (back up + copy) ~/.fzf.zsh
+backup_and_copy "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+
+# 5. Replace (back up + copy) ~/.fzf.zsh
+backup_and_copy "$DOTFILES_DIR/.aerospace.toml" "$HOME/.aerospace.toml"
+
+# 5. Replace (back up + copy) everything under .config
 sync_dir_contents "$DOTFILES_DIR/.config" "$HOME/.config"
 
 echo "[INFO] All dotfiles and config items have been processed!"
