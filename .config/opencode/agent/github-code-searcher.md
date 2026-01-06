@@ -6,7 +6,7 @@ tools:
   edit: false
   write: false
   # Only GitHub MCP access
-  github_grep_*: true
+  github_*: true
   # Block other MCP servers
   exa_*: false
   chrome-devtools_*: false

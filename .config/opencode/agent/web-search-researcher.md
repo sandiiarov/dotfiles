@@ -8,7 +8,7 @@ tools:
   # Only Exa MCP access for web research
   exa_*: true
   # Block other MCP servers
-  github_grep_*: false
+  github_*: false
   chrome-devtools_*: false
   shadcn_*: false
   convex_*: false

@@ -9,7 +9,7 @@ tools:
   convex_*: true
   # Block other MCP servers
   exa_*: false
-  github_grep_*: false
+  github_*: false
   chrome-devtools_*: false
   shadcn_*: false
   clerk_*: false

@@ -8,7 +8,7 @@ permission:
 tools:
   # Block MCP access - only sub-agents have MCP access
   exa_*: false
-  github_grep_*: false
+  github_*: false
   chrome-devtools_*: false
   shadcn_*: false
   convex_*: false
